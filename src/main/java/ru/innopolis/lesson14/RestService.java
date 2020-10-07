@@ -37,14 +37,5 @@ public class RestService extends HttpServlet {
         for (Map.Entry<String, String> entry : env) {
             resp.getWriter().println(entry.getKey() + ": " + entry.getValue());
         }
-        /*if (param == null || param.isEmpty()) {
-            for (Map.Entry<String, String> entry : env) {
-                resp.getWriter().write(entry.getKey() + ": " + entry.getValue());
-            }
-        } else if (env.contains(param)) {
-            resp.getWriter().write(param + env.get(Integer.parseInt(param)));
-        } else {
-            resp.getWriter().write(param);
-        }*/
     }
 }
