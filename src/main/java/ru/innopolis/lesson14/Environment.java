@@ -10,7 +10,7 @@ import java.util.Optional;
  * Класс, предоставляющий переменные окружения среды
  */
 @Stateless
-public class Accessor {
+public class Environment {
 
     /**
      * Возвращает полный список переменных окружения

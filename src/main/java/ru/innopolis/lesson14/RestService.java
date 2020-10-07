@@ -9,16 +9,42 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * REST сервис для предоставления списка переменных среды
+ * Запросом http://localhost:8080/lesson14-1.0/environments можно получить список всех переменных среды
+ */
 public class RestService extends HttpServlet {
 
+    /**
+     * Внедрение компонента accessor
+     */
     @EJB
-    Accessor accessor;
+    private Environment environment;
 
+    /**
+     * Метод обрабатывает запрос, в зависимости от запроса отправляет соответствующий ответ
+     *
+     * @param req  запрос
+     * @param resp ответ
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        final List<Map.Entry<String, String>> environment = accessor.getEnvironment();
-        for (Map.Entry<String, String> entry : environment) {
+        //String param = req.getParameter("param");
+        final List<Map.Entry<String, String>> env = environment.getEnvironment();
+
+        for (Map.Entry<String, String> entry : env) {
             resp.getWriter().println(entry.getKey() + ": " + entry.getValue());
         }
+        /*if (param == null || param.isEmpty()) {
+            for (Map.Entry<String, String> entry : env) {
+                resp.getWriter().write(entry.getKey() + ": " + entry.getValue());
+            }
+        } else if (env.contains(param)) {
+            resp.getWriter().write(param + env.get(Integer.parseInt(param)));
+        } else {
+            resp.getWriter().write(param);
+        }*/
     }
 }
