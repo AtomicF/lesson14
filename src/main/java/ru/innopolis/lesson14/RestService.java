@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * REST сервис для предоставления списка переменных среды
@@ -31,11 +32,20 @@ public class RestService extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //String param = req.getParameter("param");
+        String param = req.getParameter("param");
         final List<Map.Entry<String, String>> env = environment.getEnvironment();
 
-        for (Map.Entry<String, String> entry : env) {
-            resp.getWriter().println(entry.getKey() + ": " + entry.getValue());
+        if (param != null) {
+            final Optional<String> value = environment.getEnvironmentValue(param);
+            if (value.isPresent()) {
+                resp.getWriter().println(value.get());
+            } else {
+                resp.getWriter().println("Переменная не найдена");
+            }
+        } else {
+            for (Map.Entry<String, String> entry : env) {
+                resp.getWriter().println(entry.getKey() + ": " + entry.getValue());
+            }
         }
     }
 }

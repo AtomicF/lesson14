@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="params" class="ru.innopolis.lesson14.Environment" scope="session"/>
 
+
 <html>
 <head>
     <title>Title</title>
