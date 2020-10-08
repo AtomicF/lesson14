@@ -13,6 +13,7 @@ import java.util.Optional;
 /**
  * REST сервис для предоставления списка переменных среды
  * Запросом http://localhost:8080/lesson14-1.0/environments можно получить список всех переменных среды
+ * http://localhost:8080/lesson14-1.0/environments?param=ИМЯ_ПЕРЕМЕННОЙ вывод конкретного значения переменной
  */
 public class RestService extends HttpServlet {
 
